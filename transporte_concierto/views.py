@@ -8,6 +8,6 @@ def test_db(request):
         resultado = cursor.fetchone()
 
     return JsonResponse({
-        "mensaje": "Conexión con Neon exitosa",
+        "mensaje": "Hola cony",
         "resultado": resultado[0]
     })
