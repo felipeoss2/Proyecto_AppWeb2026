@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(
-        os.environ['DATABASE_URL']
+        os.environ['DB_URL']
     )
 }
 # Password validation
