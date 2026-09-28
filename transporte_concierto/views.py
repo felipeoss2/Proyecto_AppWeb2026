@@ -1,4 +1,13 @@
-from django.http import HttpResponse
+from django.http import JsonResponse
+from django.db import connection
 
-def inicio(request):
-    return HttpResponse("Django funcionando correctamente")
+
+def test_db(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT 1;")
+        resultado = cursor.fetchone()
+
+    return JsonResponse({
+        "mensaje": "Conexión con Neon exitosa",
+        "resultado": resultado[0]
+    })

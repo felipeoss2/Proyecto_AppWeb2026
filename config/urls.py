@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from transporte_concierto.views import inicio
+from transporte_concierto.views import test_db
 
 urlpatterns = [
-    path('', inicio),
     path('admin/', admin.site.urls),
+    path('test-db/', test_db),
+    
 ]
