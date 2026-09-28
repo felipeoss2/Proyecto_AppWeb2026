@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from transporte_concierto.views import test_db
+from transporte_concierto import views
 
 urlpatterns = [
+    path('api/viajes/pendientes/', views.listar_viajes_pendientes, name='viajes_pendientes'),
+    path('api/pagos/', views.listar_pagos, name='listar_pagos'),
     path('admin/', admin.site.urls),
-    path('test-db/', test_db),
+
     
 ]
