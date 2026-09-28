@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from transporte_concierto.views import inicio
+
 urlpatterns = [
+    path('', inicio),
     path('admin/', admin.site.urls),
 ]
