@@ -47,3 +47,37 @@ def get_viajes_pendientes():
             WHERE vc."estado" = 'pendiente';
         ''')
         return dictfetchall(cursor)
+    
+def crear_viaje_pendiente(id_admin, fecha_viaje, descripcion, recinto, titulo, origen, destino):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            INSERT INTO "Viaje_a_concierto" (
+                "id_admin", "fecha_viaje", "descripcion", "recinto", 
+                "estado", "titulo", "direccion_origen", "direccion_destino"
+            )
+            VALUES (%s, %s, %s, %s, 'pendiente', %s, %s, %s)
+            RETURNING "id_viaje";
+        ''', [id_admin, fecha_viaje, descripcion, recinto, titulo, origen, destino])
+        
+        # Retorna el ID del viaje recién creado
+        return cursor.fetchone()[0]
+
+# =======================
+# CONSULTAS DELETE (2)
+# =======================
+def borrar_viaje(id_viaje):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            DELETE FROM "Viaje_a_concierto"
+            WHERE "id_viaje" = %s;
+        ''', [id_viaje])
+
+# =======================
+# CONSULTAS Imsert (2)
+# =======================
+def asignar_vehiculo_a_viaje(id_viaje, patente):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            INSERT INTO "Viaje_a_concierto_usa_Vehiculo" ("id_viaje", "patente")
+            VALUES (%s, %s);
+        ''', [id_viaje, patente])
